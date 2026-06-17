@@ -2,110 +2,110 @@ import { logger } from '../utils/logger.js';
 
 export const botConfig = {
   // =========================
-  // BOT PRESENCE (what users see under the bot name)
+  // BOT DURUMU (kullanıcıların bot adının altında gördüğü kısım)
   // =========================
-  // `status` options:
-  // - "online"    = green dot
-  // - "idle"      = yellow moon
-  // - "dnd"       = red do-not-disturb
-  // - "invisible" = appears offline
+  // `status` seçenekleri:
+  // - "online"    = yeşil nokta
+  // - "idle"      = sarı ay
+  // - "dnd"       = kırmızı rahatsız etmeyin
+  // - "invisible" = çevrimdışı (görünmez) görünür
   presence: {
-    // Current online state shown on Discord.
+    // Discord üzerinde gösterilen mevcut çevrimiçi durumu.
     status: "online",
 
-    // Activity lines shown under the bot name.
-    // `type` number mapping from Discord:
-    // 0 = Playing
-    // 1 = Streaming
-    // 2 = Listening
-    // 3 = Watching
-    // 4 = Custom
-    // 5 = Competing
+    // Bot adının altında gösterilen etkinlik satırları.
+    // Discord'dan alınan `type` numara eşlemesi:
+    // 0 = Oynuyor
+    // 1 = Yayınlıyor
+    // 2 = Dinliyor
+    // 3 = İzliyor
+    // 4 = Özel
+    // 5 = Yarışıyor
     activities: [
       {
-        // Text users will see (example: "Playing /help | Titan Bot").
-        name: "Made with ❤️",
-        // Activity type number (0 = Playing).
-        type: 0,
+        // Kullanıcıların göreceği metin (örnek: "/help Oynuyor | Titan Bot").
+        name: "motoaki ile yapıldı",
+        // Etkinlik türü numarası (0 = Oynuyor).
+        type: 2,
       },
     ],
   },
 
   // =========================
-  // COMMAND BEHAVIOR
+  // KOMUT DAVRANIŞI
   // =========================
   commands: {
-    // Bot owner user IDs (comma-separated in OWNER_IDS env var).
-    // Owners can access owner/admin-level bot commands.
+    // Bot sahibi kullanıcı ID'leri (OWNER_IDS ortam değişkeninde virgülle ayrılmış olmalı).
+    // Sahipler, sahip/yönetici düzeyindeki bot komutlarına erişebilir.
     owners: process.env.OWNER_IDS?.split(",") || [],
 
-    // Default wait time between command uses (in seconds).
+    // Komut kullanımları arasındaki varsayılan bekleme süresi (saniye cinsinden).
     defaultCooldown: 3,
 
-    // If true, old commands are removed before re-registering.
+    // Doğruysa (true), eski komutlar yeniden kaydedilmeden önce kaldırılır.
     deleteCommands: false,
 
-    // Optional server ID used for testing slash commands quickly.
+    // Eğik çizgi (slash) komutlarını hızlıca test etmek için kullanılan isteğe bağlı sunucu ID'si.
     testGuildId: process.env.TEST_GUILD_ID,
 
-    // Command prefix for text-based commands (e.g., "!" for "!ping").
-    // Supports both slash commands and prefix commands.
+    // Metin tabanlı komutlar için komut ön eki (ör. "!ping" için "!").
+    // Hem eğik çizgi komutlarını hem de ön ek komutlarını destekler.
     prefix: process.env.PREFIX || "!",
   },
 
   // =========================
-  // APPLICATIONS SYSTEM
+  // BAŞVURU SİSTEMİ
   // =========================
   applications: {
-    // Default questions shown when someone fills out an application.
+    // Birisi başvuru formunu doldurduğunda gösterilen varsayılan sorular.
     defaultQuestions: [
-      { question: "What is your name?", required: true },
-      { question: "How old are you?", required: true },
-      { question: "Why do you want to join?", required: true },
+      { question: "Adınız nedir?", required: true },
+      { question: "Kaç yaşındasınız?", required: true },
+      { question: "Neden katılmak istiyorsunuz?", required: true },
     ],
 
-    // Embed colors by application status.
+    // Başvuru durumuna göre embed renkleri.
     statusColors: {
       pending: "#FFA500",
       approved: "#00FF00",
       denied: "#FF0000",
     },
 
-    // How long users must wait before submitting another application (hours).
+    // Kullanıcıların başka bir başvuru göndermeden önce ne kadar beklemesi gerektiği (saat).
     applicationCooldown: 24,
 
-    // Auto-delete denied applications after this many days.
+    // Reddedilen başvuruları şu kadar gün sonra otomatik sil.
     deleteDeniedAfter: 7,
 
-    // Auto-delete approved applications after this many days.
+    // Onaylanan başvuruları şu kadar gün sonra otomatik sil.
     deleteApprovedAfter: 30,
 
-    // Role IDs allowed to manage applications.
-    managerRoles: [], // Will be populated from environment or database
+    // Başvuruları yönetmesine izin verilen rol ID'leri. // Ortamdan veya veritabanından doldurulacak
+    managerRoles: [], 
   },
 
   // =========================
-  // EMBED COLORS & BRANDING
+  // EMBED RENKLERİ VE MARKALAMA
   // =========================
-  // IMPORTANT: This is the SINGLE SOURCE OF TRUTH for all bot colors
+  // ÖNEMLİ: Bu bölüm tüm bot renkleri için TEK DOĞRU KAYNAKTIR
   embeds: {
     colors: {
-      // Main brand colors.
+      // Ana marka renkleri.
       primary: "#336699",
       secondary: "#2F3136",
 
-      // Standard status colors for success/error/warning/info messages.
+      // Başarı/hata/uyarı/bilgi mesajları için standart durum renkleri.
       success: "#57F287",
       error: "#ED4245",
       warning: "#FEE75C",
       info: "#3498DB",
 
-      // Neutral utility colors.
+      // Nötr yardımcı renkler.
       light: "#FFFFFF",
       dark: "#202225",
       gray: "#99AAB5",
 
-      // Discord-style palette shortcuts.
+      // Discord tarzı palet kısayolları.
       blurple: "#5865F2",
       green: "#57F287",
       yellow: "#FEE75C",
@@ -113,7 +113,7 @@ export const botConfig = {
       red: "#ED4245",
       black: "#000000",
 
-      // Feature-specific colors.
+      // Özelliğe özel renkler.
       giveaway: {
         active: "#57F287",
         ended: "#ED4245",
@@ -128,7 +128,7 @@ export const botConfig = {
       birthday: "#E91E63",
       moderation: "#9B59B6",
 
-      // Ticket priority color mapping.
+      // Bilet (destek talebi) öncelik renk eşlemesi.
       priority: {
         none: "#95A5A6",
         low: "#3498db",
@@ -138,15 +138,15 @@ export const botConfig = {
       },
     },
     footer: {
-      // Default footer text used in bot embeds.
+      // Bot embed'lerinde kullanılan varsayılan altbilgi (footer) metni.
       text: "Titan Bot",
-      // Footer icon URL (null = no icon).
+      // Altbilgi simgesi URL'si (null = simge yok).
       icon: null,
     },
-    // Default thumbnail URL for embeds (null = no thumbnail).
+    // Embed'ler için varsayılan küçük resim (thumbnail) URL'si (null = küçük resim yok).
     thumbnail: null,
     author: {
-      // Optional default embed author block.
+      // İsteğe bağlı varsayılan embed yazar (author) bloğu.
       name: null,
       icon: null,
       url: null,
@@ -154,389 +154,179 @@ export const botConfig = {
   },
 
   // =========================
-  // ECONOMY SETTINGS
+  // EKONOMİ AYARLARI
   // =========================
   economy: {
     currency: {
-      // Currency display name.
-      name: "coins",
-      // Plural display name.
-      namePlural: "coins",
-      // Currency symbol shown in balances.
+      // Para birimi görünen adı.
+      name: "jeton",
+      // Çoğul görünen ad.
+      namePlural: "jeton",
+      // Bakiyelerde gösterilen para birimi sembolü.
       symbol: "$",
     },
 
-    // Starting balance for new users.
+    // Yeni kullanıcılar için başlangıç bakiyesi.
     startingBalance: 0,
 
-    // Maximum bank amount before upgrades (if upgrades are used).
+    // Yükseltmelerden önceki maksimum banka kapasitesi (eğer yükseltmeler kullanılıyorsa).
     baseBankCapacity: 100000,
 
-    // Daily reward amount.
+    // Günlük ödül miktarı.
     dailyAmount: 100,
 
-    // Work command random payout range.
+    // Work (çalışma) komutu rastgele ödeme aralığı.
     workMin: 10,
     workMax: 100,
 
-    // Beg command random payout range.
+    // Beg (dilenme) komutu rastgele ödeme aralığı.
     begMin: 5,
     begMax: 50,
 
-    // Chance to succeed when robbing (0.4 = 40%).
+    // Soygun (rob) yaparken başarılı olma şansı (0.4 = %40).
     robSuccessRate: 0.4,
 
-    // Jail time after failed rob (milliseconds).
-    // 3600000 = 1 hour.
+    // Başarısız soygundan sonra hapis süresi (milisaniye).
+    // 3600000 = 1 saat.
     robFailJailTime: 3600000,
   },
 
   // =========================
-  // SHOP SETTINGS
+  // MAĞAZA AYARLARI
   // =========================
-  // Add shop defaults here when needed.
+  // Gerektiğinde buraya mağaza varsayılanlarını ekleyebilirsiniz.
   shop: {
 
   },
 
   // =========================
-  // TICKET SYSTEM
+  // BİLET (DESTEK TALEBİ) SİSTEMİ
   // =========================
   tickets: {
-    // Category ID where new tickets are created (null = no forced category).
+    // Yeni biletlerin oluşturulduğu kategori ID'si (null = zorunlu kategori yok).
     defaultCategory: null,
 
-    // Role IDs allowed to manage/support tickets.
+    // Biletleri yönetmesine/desteklemesine izin verilen rol ID'leri.
     supportRoles: [],
 
-    // Priority options users/staff can assign.
+    // Kullanıcıların/yetkililerin atayabileceği öncelik seçenekleri.
     priorities: {
       none: {
         emoji: "⚪",
         color: "#95A5A6",
-        label: "None",
+        label: "Yok",
       },
       low: {
         emoji: "🟢",
         color: "#2ECC71",
-        label: "Low",
+        label: "Düşük",
       },
       medium: {
         emoji: "🟡",
         color: "#F1C40F",
-        label: "Medium",
+        label: "Orta",
       },
       high: {
         emoji: "🔴",
         color: "#E74C3C",
-        label: "High",
+        label: "Yüksek",
       },
       urgent: {
         emoji: "🚨",
         color: "#E91E63",
-        label: "Urgent",
+        label: "Acil",
       },
     },
 
-    // Default priority for new tickets.
+    // Yeni biletler için varsayılan öncelik.
     defaultPriority: "none",
 
-    // Category ID where closed tickets are archived.
+    // Kapatılan biletlerin arşivlendiği kategori ID'si.
     archiveCategory: null,
 
-    // Channel ID where ticket logs are sent.
+    // Bilet günlüklerinin (log) gönderildiği kanal ID'si.
     logChannel: null,
   },
 
   // =========================
-  // GIVEAWAY SETTINGS
+  // ÇEKİLİŞ AYARLARI
   // =========================
   giveaways: {
-    // Default giveaway duration in milliseconds.
-    // 86400000 = 24 hours.
+    // Milisaniye cinsinden varsayılan çekiliş süresi.
+    // 86400000 = 24 saat.
     defaultDuration: 86400000,
 
-    // Allowed winner count range.
+    // İzin verilen kazanan sayısı aralığı.
     minimumWinners: 1,
     maximumWinners: 10,
 
-    // Allowed giveaway duration range in milliseconds.
-    // 300000 = 5 minutes.
+    // Milisaniye cinsinden izin verilen çekiliş süresi aralığı.
+    // 300000 = 5 dakika.
     minimumDuration: 300000,
-    // 2592000000 = 30 days.
+    // 2592000000 = 30 gün.
     maximumDuration: 2592000000,
 
-    // Role IDs allowed to host giveaways.
+    // Çekiliş düzenlemesine izin verilen rol ID'leri.
     allowedRoles: [],
 
-    // Role IDs that bypass giveaway restrictions.
+    // Çekiliş kısıtlamalarını atlayan rol ID'leri.
     bypassRoles: [],
   },
 
   // =========================
-  // BIRTHDAY SETTINGS
+  // DOĞUM GÜNÜ AYARLARI
   // =========================
   birthday: {
-    // Role ID given to users on their birthday.
+    // Doğum günlerinde kullanıcılara verilen rol ID'si.
     defaultRole: null,
 
-    // Channel ID where birthday announcements are posted.
+    // Doğum günü duyurularının yayınlandığı kanal ID'si.
     announcementChannel: null,
 
-    // Timezone used to calculate birthday dates.
+    // Doğum günü tarihlerini hesaplamak için kullanılan saat dilimi.
     timezone: "UTC",
   },
 
   // =========================
-  // VERIFICATION SETTINGS
+  // DOĞRULAMA AYARLARI
   // =========================
   verification: {
-    // Message shown when posting the verification panel.
-    defaultMessage: "Click the button below to verify yourself and gain access to the server!",
+    // Doğrulama paneli gönderildiğinde gösterilen mesaj.
+    defaultMessage: "Sunucuya erişim sağlamak ve kendinizi doğrulamak için aşağıdaki butona tıklayın!",
 
-    // Text on the verification button.
-    defaultButtonText: "Verify",
+    // Doğrulama butonundaki metin.
+    defaultButtonText: "Doğrula",
 
-    // Automatic verification behavior.
+    // Otomatik doğrulama davranışı.
     autoVerify: {
-      // How automatic verification decides who is auto-approved:
-      // - "none"        = everyone is auto-verified immediately
-      // - "account_age" = account must be older than set days
-      // - "server_size" = auto-verify everyone only in smaller servers
+      // Otomatik doğrulamanın kimin otomatik olarak onaylanacağına nasıl karar verdiği:
+      // - "none"        = herkes anında otomatik olarak doğrulanır
+      // - "account_age" = hesap belirlenen günden daha eski olmalıdır
+      // - "server_size" = yalnızca küçük sunuculardaki herkesi otomatik olarak doğrula
       defaultCriteria: "none",
 
-      // Days used when `defaultCriteria` is `account_age`.
+      // `defaultCriteria`, `account_age` olduğunda kullanılan gün sayısı.
       defaultAccountAgeDays: 7,
 
-      // Member count threshold used when `defaultCriteria` is `server_size`.
-      // Example: 1000 means auto-verify if server has fewer than 1000 members.
+      // `defaultCriteria`, `server_size` olduğunda kullanılan üye sayısı sınırı.
+      // Örnek: 1000, sunucuda 1000'den az üye varsa otomatik doğrula anlamına gelir.
       serverSizeThreshold: 1000,
 
-      // Allowed safety limits for account-age requirements.
-      // 1 = minimum day, 365 = maximum days.
+      // Hesap yaşı gereksinimleri için izin verilen güvenlik sınırları.
+      // 1 = minimum gün, 365 = maksimum gün.
       minAccountAge: 1,
       maxAccountAge: 365,
 
-      // If true, user receives a DM after verification.
+      // Eğer true ise, doğrulamanın ardından kullanıcı bir DM alır.
       sendDMNotification: true,
 
-      // Human-readable descriptions for each criteria mode.
+      // Her bir kriter modu için insanlar tarafından okunabilir açıklamalar.
       criteria: {
-        account_age: "Account must be older than specified days",
-        server_size: "All users if server has less than 1000 members",
-        none: "All users immediately"
+        account_age: "Hesap belirtilen günlerden daha eski olmalıdır",
+        server_size: "Sunucu 1000 üyeden azsa tüm kullanıcılar",
+        none: "Tüm kullanıcılar anında"
       }
     },
 
-    // Minimum time between verification attempts (milliseconds).
-    // 5000 = 5 seconds.
-    verificationCooldown: 5000,
-
-    // Maximum failed attempts allowed inside the time window below.
-    maxVerificationAttempts: 3,
-
-    // Time window for counting attempts (milliseconds).
-    // 60000 = 1 minute.
-    attemptWindow: 60000,
-
-    // In-memory safety limits (helps avoid unbounded memory growth).
-    maxCooldownEntries: 10000,
-    maxAttemptEntries: 10000,
-    // Cleanup frequency for cooldown/attempt maps (milliseconds).
-    // 300000 = 5 minutes.
-    cooldownCleanupInterval: 300000,
-    // Maximum metadata payload size for audit entries (bytes).
-    maxAuditMetadataBytes: 4096,
-    // Maximum number of audit entries kept in memory.
-    maxInMemoryAuditEntries: 1000,
-    // If true, log every verification action.
-    logAllVerifications: true,
-    // If true, preserve verification audit history.
-    keepAuditTrail: true,
-  },
-
-  // =========================
-  // WELCOME / GOODBYE MESSAGES
-  // =========================
-  welcome: {
-    // Welcome template posted when a user joins.
-    // Placeholders: {user}, {server}, {memberCount}
-    defaultWelcomeMessage:
-      "Welcome {user} to {server}! We now have {memberCount} members!",
-    // Goodbye template posted when a user leaves.
-    // Placeholders: {user}, {memberCount}
-    defaultGoodbyeMessage:
-      "{user} has left the server. We now have {memberCount} members.",
-    // Channel ID for welcome messages.
-    defaultWelcomeChannel: null,
-    // Channel ID for goodbye messages.
-    defaultGoodbyeChannel: null,
-  },
-
-  // =========================
-  // COUNTER CHANNELS
-  // =========================
-  counters: {
-    defaults: {
-      // Default naming/description templates for counter entries.
-      name: "{name} Counter",
-      description: "Server {name} counter",
-      // Channel type used for counters (typically "voice").
-      type: "voice",
-      // Channel name format. `{count}` is replaced automatically.
-      channelName: "{name}-{count}",
-    },
-    permissions: {
-      // Default denied permissions for the counter channel.
-      deny: ["VIEW_CHANNEL"],
-      // Default allowed permissions for the counter channel.
-      allow: ["VIEW_CHANNEL", "CONNECT", "SPEAK"],
-    },
-    messages: {
-      // Default response messages for counter actions.
-      created: "✅ Created counter **{name}**",
-      deleted: "🗑️ Deleted counter **{name}**",
-      updated: "🔄 Updated counter **{name}**",
-    },
-    types: {
-      // Built-in counter types and how each count is calculated.
-      members: {
-        name: "👥 Members",
-        description: "Total members in the server",
-        getCount: (guild) => guild.memberCount.toString(),
-      },
-      bots: {
-        name: "🤖 Bots",
-        description: "Total bot accounts in the server",
-        getCount: (guild) =>
-          guild.members.cache.filter((m) => m.user.bot).size.toString(),
-      },
-      members_only: {
-        name: "👤 Humans",
-        description: "Total human members (non-bots)",
-        getCount: (guild) =>
-          guild.members.cache.filter((m) => !m.user.bot).size.toString(),
-      },
-    },
-  },
-
-  // =========================
-  // GENERIC BOT MESSAGES
-  // =========================
-  messages: {
-    noPermission: "You do not have permission to use this command.",
-    cooldownActive: "Please wait {time} before using this command again.",
-    errorOccurred: "An error occurred while executing this command.",
-    missingPermissions:
-      "I am missing required permissions to perform this action.",
-    commandDisabled: "This command has been disabled.",
-    maintenanceMode: "The bot is currently in maintenance mode.",
-  },
-
-  // =========================
-  // FEATURE TOGGLES
-  // =========================
-  // Set any feature to `false` to disable it globally.
-  features: {
-    // Core systems.
-    economy: true,
-    leveling: true,
-    moderation: true,
-    logging: true,
-    welcome: true,
-
-    // Community engagement systems.
-    tickets: true,
-    giveaways: true,
-    birthday: true,
-    counter: true,
-
-    // Security and self-service systems.
-    verification: true,
-    reactionRoles: true,
-    joinToCreate: true,
-
-    // Utility/quality-of-life modules.
-    voice: true,
-    search: true,
-    tools: true,
-    utility: true,
-    community: true,
-    fun: true,
-  },
-};
-
-export function validateConfig(config) {
-  const errors = [];
-
-  if (process.env.NODE_ENV !== 'production') {
-    logger.debug('Environment variables check:');
-    logger.debug('DISCORD_TOKEN exists:', !!process.env.DISCORD_TOKEN);
-    logger.debug('TOKEN exists:', !!process.env.TOKEN);
-    logger.debug('CLIENT_ID exists:', !!process.env.CLIENT_ID);
-    logger.debug('GUILD_ID exists:', !!process.env.GUILD_ID);
-    logger.debug('POSTGRES_HOST exists:', !!process.env.POSTGRES_HOST);
-    logger.debug('NODE_ENV:', process.env.NODE_ENV);
-  }
-
-  if (!process.env.DISCORD_TOKEN && !process.env.TOKEN) {
-    errors.push("Bot token is required (DISCORD_TOKEN or TOKEN environment variable)");
-  }
-
-  if (!process.env.CLIENT_ID) {
-    errors.push("Client ID is required (CLIENT_ID environment variable)");
-  }
-
-  if (process.env.NODE_ENV === 'production') {
-    if (!process.env.POSTGRES_HOST) {
-      errors.push("PostgreSQL host is required in production (POSTGRES_HOST environment variable)");
-    }
-    if (!process.env.POSTGRES_USER) {
-      errors.push("PostgreSQL user is required in production (POSTGRES_USER environment variable)");
-    }
-    if (!process.env.POSTGRES_PASSWORD) {
-      errors.push("PostgreSQL password is required in production (POSTGRES_PASSWORD environment variable)");
-    }
-  }
-
-  return errors;
-}
-
-const configErrors = validateConfig(botConfig);
-if (configErrors.length > 0) {
-  logger.error("Bot configuration errors:", configErrors.join("\n"));
-  if (process.env.NODE_ENV === "production") {
-    process.exit(1);
-  }
-}
-
-export const BotConfig = botConfig;
-
-export function getColor(path, fallback = "#99AAB5") {
-  
-  if (typeof path === "number") return path;
-  if (typeof path === "string" && path.startsWith("#")) {
-    
-    return parseInt(path.replace("#", ""), 16);
-  }
-  const result = path
-    .split(".")
-    .reduce(
-      (obj, key) => (obj && obj[key] !== undefined ? obj[key] : fallback),
-      botConfig.embeds.colors,
-    );
-  
-  if (typeof result === "string" && result.startsWith("#")) {
-    return parseInt(result.replace("#", ""), 16);
-  }
-  return result;
-}
-
-export function getRandomColor() {
-  const colors = Object.values(botConfig.embeds.colors).flatMap((color) =>
-    typeof color === "string" ? color : Object.values(color),
-  );
-  return colors[Math.floor(Math.random() * colors.length)];
-}
-
-export default botConfig;
+    // Doğrulama denemeleri arasındaki minimum süre (milisaniye).
+    // 5000 = 5 saniye
